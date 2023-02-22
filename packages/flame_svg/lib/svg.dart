@@ -40,6 +40,13 @@ class Svg {
     );
   }
 
+  static Future<Svg> loadString(String svgString, {double? pixelRatio}) async {
+    return Svg(
+      await svg.fromSvgString(svgString, svgString),
+      pixelRatio: pixelRatio,
+    );
+  }
+
   /// Renders the svg on the [canvas] using the dimensions provided by [size].
   void render(
     Canvas canvas,
@@ -115,4 +122,6 @@ class Svg {
 extension SvgLoader on Game {
   /// Loads an [Svg] using the [Game]'s own asset loader.
   Future<Svg> loadSvg(String fileName) => Svg.load(fileName, cache: assets);
+
+  Future<Svg> loadSvgString(String svgString) => Svg.loadString(svgString);
 }
